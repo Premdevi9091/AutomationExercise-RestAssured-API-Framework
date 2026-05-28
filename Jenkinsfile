@@ -27,22 +27,28 @@ pipeline {
             }
         }
 
+        stage('Generate Allure Report') {
+            steps {
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    results: [[path: 'target/allure-results']]
+                ])
+            }
+        }
+
         stage('Archive Reports') {
             steps {
-                archiveArtifacts artifacts: 'target/allure-results/**',
-                                  fingerprint: true,
-                                  allowEmptyArchive: true
-
                 archiveArtifacts artifacts: 'target/API_Report_AutomationExcercise.html',
-                                  fingerprint: true,
-                                  allowEmptyArchive: true
+                                 fingerprint: true,
+                                 allowEmptyArchive: true
             }
         }
     }
 
     post {
         always {
-            junit testResults: '**/surefire-reports/*.xml',
+            junit testResults: '**/surefire-reports/junitreports/*.xml',
                   allowEmptyResults: true
         }
     }
