@@ -18,28 +18,28 @@ src/
 └── test/
     ├── java/
     │   └── api/
-    │       ├── base/              # BaseTest — suite-level RestAssured config
-    │       ├── client/            # ApiClient — reusable HTTP method wrappers
-    │       ├── constants/         # Endpoints — all API endpoint constants
+    │       ├── base/                                # BaseTest — suite-level RestAssured config
+    │       ├── client/                              # ApiClient — reusable HTTP method wrappers
+    │       ├── constants/                           # Endpoints — all API endpoint constants
     │       ├── models/
-    │       │   ├── request/       # POJO models for request payloads
-    │       │   └── response/      # POJO models for response deserialization
-    │       ├── reports/           # ExtentReports setup, logging, TestNG listener
-    │       ├── specifications/    # RestAssured RequestSpec / ResponseSpec builders
-    │       ├── tests/             # Test classes (one per API feature domain)
+    │       │   ├── request/                         # POJO models for request payloads
+    │       │   └── response/                        # POJO models for response deserialization
+    │       ├── reports/                             # ExtentReports setup, logging, TestNG listener
+    │       ├── specifications/                      # RestAssured RequestSpec / ResponseSpec builders
+    │       ├── tests/                               # Test classes (one per API feature domain)
     │       ├── utils/
-    │       │   └── PayloadBuilder/ # Builder classes for each request model
-    │       │   ├── FakerUtils.java # Faker-based random data generation
-    │       │   ├── PojoConverter.java   # POJO → Map converter for form-data
-    │       │   ├── ApiReportUtil.java   # Request/Response logging utility
+    │       │   └── PayloadBuilder/                  # Builder classes for each request model
+    │       │   ├── FakerUtils.java                  # Faker-based random data generation
+    │       │   ├── PojoConverter.java               # POJO → Map converter for form-data
+    │       │   ├── ApiReportUtil.java               # Request/Response logging utility
     │       │   ├── AllureAttachments.java
     │       │   ├── ProductDataGenerator.java
     │       │   └── SchemaValidatorUtil.java
-    │       └── validators/        # ResponseValidator — assertion helper methods
+    │       └── validators/                          # ResponseValidator — assertion helper methods
     └── resources/
-        ├── config/               # (Reserved for environment config files)
-        ├── schemas/              # JSON schema files for schema validation
-        └── testdata/             # (Reserved for external test data files)
+        ├── config/                                  # (Reserved for environment config files)
+        ├── schemas/                                 # JSON schema files for schema validation
+        └── testdata/                                # (Reserved for external test data files)
 ```
 
 ---
