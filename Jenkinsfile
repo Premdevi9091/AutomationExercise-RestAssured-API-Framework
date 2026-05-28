@@ -29,7 +29,9 @@ pipeline {
 
         stage('Archive Reports') {
             steps {
-                archiveArtifacts artifacts: 'target/allure-results/**', fingerprint: true, allowEmptyArchive: true
+                archiveArtifacts artifacts: 'target/allure-results/**',
+                                  fingerprint: true,
+                                  allowEmptyArchive: true
 
                 archiveArtifacts artifacts: 'target/API_Report_AutomationExcercise.html',
                                   fingerprint: true,
@@ -40,7 +42,7 @@ pipeline {
 
     post {
         always {
-            junit '**/surefire-reports/*.xml',
+            junit testResults: '**/surefire-reports/*.xml',
                   allowEmptyResults: true
         }
     }
