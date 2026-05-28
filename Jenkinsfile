@@ -14,23 +14,34 @@ pipeline {
             }
         }
 
+        stage('Verify Tools') {
+            steps {
+                bat 'java -version'
+                bat 'mvn -version'
+            }
+        }
+
         stage('Run API Tests') {
             steps {
-                sh 'mvn clean test'
+                bat 'mvn clean test'
             }
         }
 
         stage('Archive Reports') {
             steps {
-                archiveArtifacts artifacts: 'target/allure-results/**', fingerprint: true
-                archiveArtifacts artifacts: 'target/API_Report_AutomationExcercise.html', fingerprint: true
+                archiveArtifacts artifacts: 'target/allure-results/**', fingerprint: true, allowEmptyArchive: true
+
+                archiveArtifacts artifacts: 'target/API_Report_AutomationExcercise.html',
+                                  fingerprint: true,
+                                  allowEmptyArchive: true
             }
         }
     }
 
     post {
         always {
-            junit '**/surefire-reports/*.xml'
+            junit '**/surefire-reports/*.xml',
+                  allowEmptyResults: true
         }
     }
 }
