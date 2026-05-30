@@ -29,7 +29,7 @@ pipeline {
 
         stage('Archive Reports') {
             steps {
-                archiveArtifacts artifacts: 'target/API_Report_AutomationExcercise.html',
+                archiveArtifacts artifacts: 'target/API_Report.html',
                                  fingerprint: true,
                                  allowEmptyArchive: true
             }
