@@ -23,8 +23,8 @@ public class UserAccountTests extends BaseTest {
     @Test
     @Story("Create Account")
     @Description("Verify user account creation with valid form data returns 200 and 'User created!'")
-    @Severity(SeverityLevel.CRITICAL)
-    @Owner("Premdevi")
+    @Severity(SeverityLevel.BLOCKER)
+    @Owner("Premdevi Kumawat")
     public void createUserAccount(){
 
         Users createUser = UserPayloadBuilder.createUserPayload();
@@ -41,7 +41,7 @@ public class UserAccountTests extends BaseTest {
     @Story("Update Account")
     @Description("Verify user account update with valid data returns 200 and 'User updated!'")
     @Severity(SeverityLevel.CRITICAL)
-    @Owner("Premdevi")
+    @Owner("Premdevi Kumawat")
     public void updateUserAccount(){
 
         // Step 1: Create user
@@ -60,8 +60,8 @@ public class UserAccountTests extends BaseTest {
     @Test
     @Story("Delete Account")
     @Description("Verify user account deletion with valid credentials returns 200 and 'Account deleted!'")
-    @Severity(SeverityLevel.CRITICAL)
-    @Owner("Premdevi")
+    @Severity(SeverityLevel.NORMAL)
+    @Owner("Premdevi Kumawat")
     public void deleteUserAccount(){
 
         // Step 1: Create user
@@ -81,8 +81,8 @@ public class UserAccountTests extends BaseTest {
     @Test
     @Story("Get User Details By Email")
     @Description("Verify fetching user details by email returns 200 and the correct email in response")
-    @Severity(SeverityLevel.CRITICAL)
-    @Owner("Premdevi")
+    @Severity(SeverityLevel.NORMAL)
+    @Owner("Prem Kumawat")
 
     public void getUserDetailsByEmail(){
 

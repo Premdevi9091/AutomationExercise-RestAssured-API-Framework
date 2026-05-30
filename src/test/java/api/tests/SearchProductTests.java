@@ -24,7 +24,7 @@ public class SearchProductTests extends BaseTest {
     @Story("Search With Valid Parameter")
     @Description("Validate search product with a valid search_product parameter returns matching products")
     @Severity(SeverityLevel.NORMAL)
-    @Owner("Premdevi")
+    @Owner("Premdevi Kumawat")
     public void searchProduct() {
 
         SearchProductRequest request = SearchProductsBuilder.buildSearchProduct();
@@ -42,7 +42,7 @@ public class SearchProductTests extends BaseTest {
     @Story("Search Without Parameter")
     @Description("Validate search product without search_product parameter returns 400 Bad Request")
     @Severity(SeverityLevel.NORMAL)
-    @Owner("Premdevi")
+    @Owner("Premdevi Kumawat")
     public void searchProductWithoutParameter() {
 
         Map<String, String > formData = new HashMap<>();

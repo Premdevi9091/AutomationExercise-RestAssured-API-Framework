@@ -26,7 +26,7 @@ public class BrandsTests extends BaseTest {
     @Story("Get All Brands")
     @Description("Validate GET brands list returns 200, valid schema, and correct headers")
     @Severity(SeverityLevel.NORMAL)
-    @Owner("Premdevi")
+    @Owner("Premdevi Kumawat")
     public void getAllBrands(){
 
         Response response = apiClient.get(Endpoints.BRANDS_LIST);
@@ -41,8 +41,8 @@ public class BrandsTests extends BaseTest {
     @Test
     @Story("POST Brands Not Supported")
     @Description("Validate POST to brands list returns 405 Method Not Allowed")
-    @Severity(SeverityLevel.CRITICAL)
-    @Owner("Premdevi")
+    @Severity(SeverityLevel.MINOR)
+    @Owner("Prem Kumawat")
     public void postBrandsList(){
 
         Brands request = BrandsPayloadBuilder.brandsPayload();

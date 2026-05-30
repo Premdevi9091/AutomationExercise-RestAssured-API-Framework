@@ -154,7 +154,7 @@ The Allure report includes:
 An auto-generated HTML report is saved after each run at:
 
 ```
-target/API_Report_AutomationExcercise.html
+target/API_Report.html
 ```
 
 Open directly in any browser — includes collapsible request/response logs per test.

@@ -24,7 +24,7 @@ public class UserLoginTests extends BaseTest {
     @Story("Valid Login")
     @Description("Verify login with valid credentials returns 200 and 'User exists!'")
     @Severity(SeverityLevel.CRITICAL)
-    @Owner("Premdevi")
+    @Owner("Prem Kumawat")
     public void validUserLogin(){
 
         // Step 1: Create user
@@ -44,8 +44,8 @@ public class UserLoginTests extends BaseTest {
     @Test
     @Story("Invalid Login")
     @Description("Verify login with invalid credentials returns responseCode 404 and 'User not found!'")
-    @Severity(SeverityLevel.CRITICAL)
-    @Owner("Premdevi")
+    @Severity(SeverityLevel.NORMAL)
+    @Owner("Prem Kumawat")
     public void invalidUserLogin(){
 
         Users request = UserPayloadBuilder.createLoginInvalidPayload();
@@ -60,8 +60,8 @@ public class UserLoginTests extends BaseTest {
     @Test
     @Story("Login Missing Email")
     @Description("Verify login with only password returns responseCode 400 Bad Request")
-    @Severity(SeverityLevel.CRITICAL)
-    @Owner("Premdevi")
+    @Severity(SeverityLevel.NORMAL)
+    @Owner("Premdevi Kumawat")
     public void loginWithPasswordOnly(){
 
         // Create a user first so the password is valid
@@ -81,8 +81,8 @@ public class UserLoginTests extends BaseTest {
     @Test
     @Story("DELETE Method Not Allowed")
     @Description("Verify DELETE on verifyLogin returns responseCode 405 Method Not Supported")
-    @Severity(SeverityLevel.NORMAL)
-    @Owner("Premdevi")
+    @Severity(SeverityLevel.MINOR)
+    @Owner("Premdevi Kumawat")
 
     public void deleteVerifyLogin() {
 

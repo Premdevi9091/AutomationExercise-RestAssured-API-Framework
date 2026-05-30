@@ -2,10 +2,8 @@ package api.reports;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import io.qameta.allure.*;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Owner;
-import io.qameta.allure.Severity;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -17,26 +15,25 @@ public class TestListener implements ITestListener {
     private static final ExtentReports extent =
             ExtentManager.getInstance();
 
-    private static final ThreadLocal<ExtentTest> extentTest =
-            new ThreadLocal<>();
+    private static final ThreadLocal<ExtentTest>
+            extentTest = new ThreadLocal<>();
 
-
-    // IMPORTANT METHOD
     public static ExtentTest getTest() {
-
         return extentTest.get();
     }
-
 
     @Override
     public void onTestStart(ITestResult result) {
 
         ExtentTest test =
                 extent.createTest(
-                        result.getMethod().getMethodName()
+                        splitCamelCase(
+                                result.getMethod()
+                                        .getMethodName()
+                        )
                 );
 
-        addAllureMetadata(test, result);
+        addMetadata(test, result);
 
         extentTest.set(test);
     }
@@ -44,14 +41,29 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestSuccess(ITestResult result) {
 
-        extentTest.get().pass("Test Passed");
+        long duration =
+                result.getEndMillis()
+                        - result.getStartMillis();
+
+        extentTest.get().pass(
+                "✅ Test Passed | Duration: "
+                        + duration + " ms"
+        );
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
 
         extentTest.get().fail(
-                result.getThrowable()
+                "❌ " + result.getThrowable()
+        );
+    }
+
+    @Override
+    public void onTestSkipped(ITestResult result) {
+
+        extentTest.get().skip(
+                "⚠️ Test Skipped"
         );
     }
 
@@ -61,25 +73,115 @@ public class TestListener implements ITestListener {
         extent.flush();
     }
 
-    private void addAllureMetadata(ExtentTest test, ITestResult result) {
+    private void addMetadata(
+            ExtentTest test,
+            ITestResult result) {
 
-        Method method = result.getMethod().getConstructorOrMethod().getMethod();
+        Method method =
+                result.getMethod()
+                        .getConstructorOrMethod()
+                        .getMethod();
 
-        Description description = method.getAnnotation(Description.class);
-        if (description != null) {
-            test.info("<b>Description:</b> " + description.value());
+        Class<?> testClass =
+                result.getTestClass()
+                        .getRealClass();
+
+        Epic epic =
+                testClass.getAnnotation(Epic.class);
+
+        Feature feature =
+                testClass.getAnnotation(Feature.class);
+
+        Story story =
+                method.getAnnotation(Story.class);
+
+        Owner owner =
+                method.getAnnotation(Owner.class);
+
+        Severity severity =
+                method.getAnnotation(Severity.class);
+
+        Description description =
+                method.getAnnotation(Description.class);
+
+        // TAGS
+        if (feature != null) {
+
+            test.assignCategory(
+                    splitCamelCase(
+                            feature.value()
+                    )
+            );
         }
 
-        Severity severity = method.getAnnotation(Severity.class);
-        if (severity != null) {
-            test.assignCategory(severity.value().value());
-            test.info("<b>Severity:</b> " + severity.value().value());
-        }
-
-        Owner owner = method.getAnnotation(Owner.class);
+        // AUTHOR
         if (owner != null) {
-            test.assignAuthor(owner.value());
-            test.info("<b>Owner:</b> " + owner.value());
+
+            test.assignAuthor(
+                    splitCamelCase(
+                            owner.value()
+                    )
+            );
         }
+
+        // SEVERITY
+        if (severity != null) {
+
+            test.assignDevice(
+                    severity.value()
+                            .value()
+                            .toUpperCase()
+            );
+        }
+
+        StringBuilder info =
+                new StringBuilder();
+
+        if (epic != null)
+            info.append("<b>Epic:</b> ")
+                    .append(epic.value())
+                    .append("<br>");
+
+        if (feature != null)
+            info.append("<b>Feature:</b> ")
+                    .append(splitCamelCase(feature.value()))
+                    .append("<br>");
+
+        if (story != null)
+            info.append("<b>Story:</b> ")
+                    .append(story.value())
+                    .append("<br>");
+
+        if (description != null)
+            info.append("<b>Description:</b> ")
+                    .append(description.value())
+                    .append("<br>");
+
+        if (severity != null)
+            info.append("<b>Severity:</b> ")
+                    .append(severity.value().value())
+                    .append("<br>");
+
+        if (owner != null)
+            info.append("<b>Owner:</b> ")
+                    .append(splitCamelCase(owner.value()))
+                    .append("<br>");
+
+        if (!info.isEmpty()) {
+            test.info(info.toString());
+        }
+    }
+
+    private String splitCamelCase(String text) {
+
+        String spaced =
+                text.replaceAll(
+                        "([a-z])([A-Z])",
+                        "$1 $2"
+                );
+
+        return Character.toUpperCase(
+                spaced.charAt(0)
+        ) + spaced.substring(1);
     }
 }

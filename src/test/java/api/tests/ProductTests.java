@@ -25,7 +25,7 @@ public class ProductTests extends BaseTest {
     @Story("Get All Products")
     @Description("Validate GET products list returns 200, valid schema, and correct Content-Type header")
     @Severity(SeverityLevel.NORMAL)
-    @Owner("Premdevi")
+    @Owner("Premdevi Kumawat")
     public void getAllProducts(){
 
         Response response = apiClient.get(Endpoints.PRODUCTS_LIST);
@@ -40,8 +40,8 @@ public class ProductTests extends BaseTest {
     @Test
     @Story("POST Products Not Supported")
     @Description("Validate POST to products list returns 405 Method Not Allowed")
-    @Severity(SeverityLevel.NORMAL)
-    @Owner("Premdevi")
+    @Severity(SeverityLevel.TRIVIAL)
+    @Owner("Prem Kumawat")
     public void postProductList(){
 
         Product request = ProductPayloadBuilder.buildProduct();
